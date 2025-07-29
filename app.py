@@ -1,7 +1,7 @@
-# Projeto: Sistema simples de padaria (Simple Bakery System)
-# Revisado dia 29/07/2025
+# Project: Simple Bakery System
+# Reviewed on 07/29/2025
 
-# Estoque de pães (quantidade disponível de cada tipo)
+# Bread stock (available quantity of each type)
 stock = {
     'bolachão': 20,
     'frances': 30,
@@ -9,7 +9,7 @@ stock = {
     'doce': 15
 }
 
-# Preços dos pães
+# Bread prices
 bread_price = {
     'bolachão': 0.5,
     'frances': 0.33,
@@ -17,18 +17,18 @@ bread_price = {
     'doce': 0.5
 }
 
-# Lista de devedores (para compras fiadas)
+# Debtors list (for purchases on credit)
 debtors = []
 
-# Exibir cardápio
+# Display menu
 print("¨¨¨ CARDÁPIO DE PÃES ¨¨¨")
 for idx, name in enumerate(stock.keys(), 1):
     print(f"{idx}- {name.capitalize()} (R${bread_price[name]:.2f})")
 
-# Escolha do tipo de pão
+# Bread type selection
 option = input("\nChefe, diz ai qual pão você deseja (digite o nome ou número)? ").strip().lower()
 
-# Convertendo número para nome se necessário
+# Convert number to name if needed
 bread_list = list(stock.keys())
 if option.isdigit() and 1 <= int(option) <= len(bread_list):
     bread_type = bread_list[int(option) - 1]
@@ -38,16 +38,16 @@ else:
     print("Não tem esse pão ai não mano!.")
     exit()
 
-# Verificar quantidade desejada
+# Check desired quantity
 quantity = int(input(f"\nQuantos pães de {bread_type} você quer meu nobre? "))
 if quantity > stock[bread_type]:
     print(f"Foi mal, só temos {stock[bread_type]} {bread_type}(s) no estoque.")
     exit()
 
-# Preço do pão escolhido
+# Price of chosen bread
 bread = bread_price[bread_type]
 
-# Seleção de método de pagamento
+# Payment method selection
 print("\nMétodos de pagamento:")
 print("1- Pix")
 print("2- Débito")
@@ -57,7 +57,7 @@ print("5- Fiado")
 
 payment_options = input("\nQual vai ser o método de pagamento chefe?: ").strip().lower()
 
-# Convertendo número para texto
+# Convert number to text
 methods = ['pix', 'débito', 'crédito', 'dinheiro', 'fiado']
 if payment_options.isdigit() and 1 <= int(payment_options) <= 5:
     payment = methods[int(payment_options) - 1]
@@ -67,7 +67,7 @@ else:
     print("Método inválido.")
     exit()
 
-# Verificação de cartão e bandeira
+# If it's a card, apply fee
 if payment in ['crédito', 'débito']:
     flag = input("Qual a bandeira do cartão?: ").lower()
     accepted_flags = ['visa', 'mastercard', 'elo', 'ticket']
@@ -77,19 +77,19 @@ if payment in ['crédito', 'débito']:
     else:
         print("Cartão aceito! :)")
 
-# Se for cartão, aplicar acréscimo
+# If it's a card, apply fee
 if payment in ['crédito', 'débito']:
     bread *= 1.05  # 5% de acréscimo
 
-# Se for crédito, perguntar parcelas
+# If credit, ask for installments
 if payment == 'crédito':
     installments = int(input("Quantas parcelas deseja? "))
     print(f"Compra em {installments}x de R${(quantity * bread)/installments:.2f}.")
 
-# Valor total da compra
+# Total purchase amount
 total = quantity * bread
 
-# Se for fiado, adicionar à lista de devedores
+# If on credit, add to debtors list
 if payment == 'fiado':
     name = input("Qual seu nome pro caderninho dos devedores?: ")
     debtors.append(name)
@@ -97,7 +97,7 @@ if payment == 'fiado':
     print("Volte sempre, seu caloteiro! (Pra pagar)")
     exit()
 
-# Receber dinheiro se for necessário
+# Receive money if necessary
 if payment == 'dinheiro':
     money = float(input("\nDiga quanto você tem em R$: "))
     if money < total:
@@ -107,7 +107,7 @@ if payment == 'dinheiro':
 else:
     change = 0.0
 
-# Finalizando venda
+# Finalizing sale
 stock[bread_type] -= quantity
 print(f"\nO pão {bread_type} custa R${bread:.2f} cada.")
 print(f"Total: R${total:.2f}")
@@ -121,7 +121,7 @@ else:
 
 print("\nCompra finalizada! Obrigado pela preferência!")
 
-# Mostrar lista de devedores se houver
+# Show debtors list if any
 if len(debtors) > 0:
     print("\nLista de devedores atual:")
     for name in debtors:
