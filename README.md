@@ -12,7 +12,7 @@ A fun and educational terminal-based application that simulates a simple bakery 
 - Multiple bread types and prices  
 - Interactive purchase flow  
 - Multiple payment options:
-  - 💰 Pix, Débito, Crédito, Dinheiro (à vista), Fiado  
+  - Pix, Débito, Crédito, Dinheiro (à vista), Fiado  
 - Automatic surcharge for credit/debit payments  
 - Installment simulation for credit cards  
 - Debtor registry for purchases on credit (fiado)  
